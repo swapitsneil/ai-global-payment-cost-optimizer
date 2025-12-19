@@ -1,0 +1,30 @@
+platform,sender_country,receiver_country,currency_sent,currency_received,fixed_fee,percentage_fee,fx_markup_percent,settlement_time_days,supported
+Wise,USA,UK,USD,GBP,1.5,0.4,0.5,1,TRUE
+PayPal,USA,India,USD,INR,2.9,3.5,2.0,0,TRUE
+Revolut,UK,France,EUR,EUR,0.5,0.2,0.3,0,TRUE
+Western Union,USA,Mexico,USD,MXN,5.0,2.0,1.5,0,TRUE
+TransferWise,Germany,Spain,EUR,EUR,1.0,0.3,0.4,1,TRUE
+Stripe,USA,Canada,USD,CAD,3.0,2.9,1.0,2,TRUE
+Skrill,UK,Australia,GBP,AUD,2.5,1.9,1.2,1,TRUE
+OFX,USA,Japan,USD,JPY,10.0,1.0,0.8,3,TRUE
+PayPal,USA,UK,USD,GBP,2.9,3.2,2.8,0,TRUE
+Revolut,USA,UK,USD,GBP,0.8,0.3,0.4,0,TRUE
+MoneyGram,USA,UK,USD,GBP,4.5,2.2,1.6,0,TRUE
+WorldRemit,USA,UK,USD,GBP,3.5,1.8,1.4,0,TRUE
+Remitly,USA,UK,USD,GBP,2.0,1.0,0.9,0,TRUE
+Payoneer,USA,India,USD,INR,1.5,1.2,1.1,1,TRUE
+Remitly,USA,India,USD,INR,2.0,1.2,1.0,0,TRUE
+Xoom,USA,India,USD,INR,4.0,2.9,2.5,0,TRUE
+MoneyGram,USA,India,USD,INR,5.5,2.1,1.8,0,TRUE
+Wise,UK,India,GBP,INR,1.7,0.6,0.7,1,TRUE
+WorldRemit,UK,India,GBP,INR,3.0,1.9,1.6,0,TRUE
+Western Union,UK,India,GBP,INR,6.0,2.4,2.0,0,TRUE
+Revolut,UK,Germany,GBP,EUR,0.5,0.2,0.3,0,TRUE
+Wise,UK,Germany,GBP,EUR,1.0,0.4,0.4,1,TRUE
+Skrill,UK,Germany,GBP,EUR,2.0,1.6,1.2,1,TRUE
+Wise,USA,Canada,USD,CAD,1.5,0.4,0.6,1,TRUE
+PayPal,USA,Canada,USD,CAD,3.0,2.9,2.2,0,TRUE
+OFX,USA,Canada,USD,CAD,8.0,0.9,0.7,2,TRUE
+Wise,USA,Australia,USD,AUD,2.0,0.5,0.8,1,TRUE
+OFX,USA,Australia,USD,AUD,12.0,1.0,0.9,3,TRUE
+WorldRemit,USA,Australia,USD,AUD,4.0,2.1,1.7,0,TRUE
