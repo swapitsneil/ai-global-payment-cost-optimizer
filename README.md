@@ -10,6 +10,10 @@
 
 **Why it matters:** Global mobility is hindered by opaque payment fees, hidden FX markups, and confusing settlement times. Our solution brings transparency and intelligence to international payments, helping users save money and make informed decisions.
 
+## 📸 Screenshot
+![Image](https://github.com/user-attachments/assets/3608b04a-0cf7-4845-af2f-6e5063138cbf)
+
+
 ## 💡 Problem Statement
 
 International payments suffer from:
