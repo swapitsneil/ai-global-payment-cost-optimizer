@@ -169,5 +169,7 @@ The core payment data is managed via CSV files that can be edited without coding
 **Is the data real?**
 The dataset contains realistic mock data based on actual payment platform fee structures. It's designed to demonstrate the concept and can be easily replaced with real data by editing the CSV file.
 
+## Author
+Swapnil Nicolson Dadel
 **How can this scale?**
 The architecture is modular and scalable. Payment data can be expanded via CSV, the AI reasoning can handle more complex scenarios, and the Streamlit UI can be extended with additional features. The solution is built to grow with user needs.
