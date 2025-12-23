@@ -148,7 +148,7 @@ AI Global Payment & Cost Optimizer/
 └── README.md                # Documentation
 ```
 
-## 🎯 Devpost Project Description (150-200 words)
+## 🎯 VisaVerse AI Hackathon Project Description
 
 **AI Global Payment & Cost Optimizer** solves the problem of opaque and expensive international payments. When sending money across borders, users face confusing fee structures, hidden FX markups, and unclear settlement times - making it difficult to choose the best payment method.
 
