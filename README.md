@@ -172,6 +172,18 @@ The dataset contains realistic mock data based on actual payment platform fee st
 **How can this scale?**
 The architecture is modular and scalable. Payment data can be expanded via CSV, the AI reasoning can handle more complex scenarios, and the Streamlit UI can be extended with additional features. The solution is built to grow with user needs.
 
+## 🚀 Future Improvements
+- Integrate real-time FX rates and live payment provider APIs
+- Support user preference weighting (cheapest vs fastest vs balanced)
+- Add historical fee and FX trend analysis
+- Enable recurring payment optimization for freelancers and teams
+- Expand coverage to more countries and payment corridors
+- Introduce confidence scoring for AI recommendations
+- Add visual fee breakdowns and comparison charts
+- Implement user profiles and saved preferences
+- Improve AI personalization based on usage patterns
+- Deploy a scalable backend for production workloads
+
 ## 👨🏻‍💼 Author
 Swapnil Nicolson Dadel
 Solo developer responsible for problem definition, system design, backend logic, Streamlit UI, AI integration via OpenRouter, data modeling, deployment, and documentation.
