@@ -174,3 +174,4 @@ The architecture is modular and scalable. Payment data can be expanded via CSV, 
 
 ## 👨🏻‍💼 Author
 Swapnil Nicolson Dadel
+Solo developer responsible for problem definition, system design, backend logic, Streamlit UI, AI integration via OpenRouter, data modeling, deployment, and documentation.
