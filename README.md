@@ -28,7 +28,11 @@ https://swapitsneil-ai-global-payment-cost-optimizer-app-pzexoa.streamlit.app/
 
 ## 📸 Screenshot
 
-
+![UI](screenshots/aicost1ui.png)
+![Comparison](screenshots/aicost2comparison.png)
+![FX Trend](screenshots/aicost3fxtrend.png)
+![AI Recommendation](screenshots/aicost4airecommendation.png)
+![Scenario Simulation](screenshots/aicost5scenariosimulation.png)
 
 ---
 
