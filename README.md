@@ -121,17 +121,17 @@ ASCII Architecture Diagram:
 ## 🚀 How to Run
 
 1. Install dependencies:
-
+```
 pip install -r requirements.txt
-
+```
 2. Create environment file:
-
+```
 OPENROUTER_API_KEY=your_api_key_here
-
+```
 3. Run the app:
-
+```
 streamlit run app.py
-
+```
 ---
 
 ## 📁 Project Structure
