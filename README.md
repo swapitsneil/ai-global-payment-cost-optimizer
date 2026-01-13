@@ -1,189 +1,184 @@
 # 🌍 AI Global Payment & Cost Optimizer
 
-**Hackathon-Ready Solution for Smart International Payments**
+Hackathon-Ready Solution for Smart International Payments
+
+---
 
 ## 🚀 Project Overview
 
-**What it does:** AI Global Payment & Cost Optimizer helps individuals and businesses find the most cost-effective way to send money internationally by comparing fees, FX rates, and settlement times across multiple payment platforms.
+AI Global Payment & Cost Optimizer helps individuals and businesses find the most cost-effective way to send money internationally by comparing fees, FX markups, settlement times, and user preferences across multiple payment platforms.
 
-**Who it's for:** Expats, digital nomads, freelancers, small businesses, and anyone making international payments who wants to maximize their money and understand the trade-offs.
+Who it's for:
+- Expats
+- Digital nomads
+- Freelancers
+- Small businesses
+- Anyone making international payments
 
-**Why it matters:** Global mobility is hindered by opaque payment fees, hidden FX markups, and confusing settlement times. Our solution brings transparency and intelligence to international payments, helping users save money and make informed decisions.
+Why it matters:
+International payments are full of hidden costs. Users lose money due to opaque fee structures, FX markups, and confusing trade-offs. This project brings transparency, intelligence, and explainability to global payments.
+
+---
 
 ## 📸 Screenshot
-![Image](https://github.com/user-attachments/assets/3608b04a-0cf7-4845-af2f-6e5063138cbf)
 
+![App Screenshot](https://github.com/user-attachments/assets/3608b04a-0cf7-4845-af2f-6e5063138cbf)
+
+---
 
 ## 💡 Problem Statement
 
 International payments suffer from:
-- **High and hidden fees** (fixed + percentage-based)
-- **Opaque FX markups** (2-5% losses hidden in exchange rates)
-- **Lack of clarity** on total costs and net received amounts
-- **No intelligent comparison** across multiple platforms
-- **Complex trade-offs** between cost, speed, and reliability
+
+- High and hidden fees (fixed + percentage-based)
+- Opaque FX markups (2–5 percent losses hidden in exchange rates)
+- Lack of clarity on total costs and net received amounts
+- No intelligent comparison across multiple platforms
+- Complex trade-offs between cost, speed, and reliability
+
+---
 
 ## ✨ Solution
 
-**AI-driven payment comparison and recommendation engine** that:
+AI Global Payment & Cost Optimizer is an AI-driven comparison and recommendation engine that:
 
-1. **Calculates exact costs** for each payment platform
-2. **Compares fees, FX losses, and settlement times**
-3. **Provides AI-powered recommendations** with clear explanations
-4. **Shows estimated savings** compared to other options
-5. **Works with editable CSV data** (no coding required)
+- Calculates exact costs for each payment platform
+- Compares fees, FX losses, and settlement times
+- Allows users to prioritize Cheapest, Fastest, or Balanced options
+- Provides AI-powered recommendations with clear explanations
+- Shows estimated savings visually
+- Works with editable CSV data (no database required)
 
-**Key Benefits:**
-- ✅ **Save money** by finding the most cost-effective option
-- ✅ **Understand trade-offs** with clear explanations
-- ✅ **Make informed decisions** with AI-powered insights
-- ✅ **No-code data management** via CSV editing
+Key benefits:
+- Save money by choosing the best platform
+- Understand trade-offs clearly
+- Get personalized recommendations
+- No-code data management via CSV files
+
+---
 
 ## 🤖 Use of AI
 
-**AI for reasoning, not calculations:**
+AI is used for reasoning, not calculations.
 
-- **Deterministic calculations**: All financial computations (fees, FX, net amounts) are rule-based and transparent
-- **AI-powered reasoning**: Evaluates trade-offs between cost, speed, and reliability
-- **Natural language explanations**: Provides clear, non-technical justifications for recommendations
-- **Comparative analysis**: Explains why one option is better than others
+- Deterministic calculations handle all financial math
+- AI analyzes trade-offs and ranking results
+- Generates natural-language explanations
+- Explains why one option is better than others
 
-**AI does NOT perform mathematical calculations** - it provides intelligent reasoning on pre-computed data.
+The AI does NOT perform financial calculations. It only reasons on pre-computed, transparent data.
+
+---
 
 ## 🏗️ Architecture Overview
 
-**Smart workflow combining rules and AI:**
+High-level flow:
 
-```
-User Input
-  ↓
-Streamlit UI (Input Collection)
-  ↓
-Calculator (Fees + FX Computation)
-  ↓
-AI Reasoning Engine (OpenRouter)
-  ↓
-Best Payment Recommendation + Explanation
-```
+User Input  
+→ Streamlit UI  
+→ Rule-based Calculator  
+→ Preference-based Scoring  
+→ AI Reasoning Engine  
+→ Final Recommendation + Explanation
 
-### Detailed Flow:
+ASCII Architecture Diagram:
 
-1. **User Input**: Amount, sender country, receiver country
-2. **Data Filtering**: Find supported payment platforms for the route
-3. **Rule-based Calculations**: Compute exact fees, FX losses, net amounts
-4. **AI Analysis**: Compare options and generate recommendations
-5. **Output**: Clear comparison table + AI explanation
+┌────────────────────────────────────────────┐
+│ User Input (Amount, Countries, Preference) │
+└───────────────┬────────────────────────────┘
+                ↓
+┌────────────────────────────────────────────┐
+│ Rule-based Calculator                      │
+│ Fixed fees, % fees, FX markup, net amount  │
+└───────────────┬────────────────────────────┘
+                ↓
+┌────────────────────────────────────────────┐
+│ Preference-weighted Scoring Engine          │
+│ Cheapest / Fastest / Balanced              │
+└───────────────┬────────────────────────────┘
+                ↓
+┌────────────────────────────────────────────┐
+│ AI Reasoning Engine (OpenRouter)            │
+│ Explains trade-offs and recommendations    │
+└───────────────┬────────────────────────────┘
+                ↓
+┌────────────────────────────────────────────┐
+│ Final Recommendation + Savings Insight     │
+└────────────────────────────────────────────┘
 
-### ASCII Architecture Diagram:
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    AI GLOBAL PAYMENT OPTIMIZER              │
-├─────────────────────────────────────────────────────────────┤
-│  🌍 User Input                                             │
-│  (Amount, Countries, Preferences)                          │
-└───────────────────┬───────────────────────────────────────┘
-                    ↓
-┌─────────────────────────────────────────────────────────────┐
-│  📊 Rule-based Calculator                                  │
-│  (Fixed fees, % fees, FX markups, Net received)            │
-└───────────────────┬───────────────────────────────────────┘
-                    ↓
-┌─────────────────────────────────────────────────────────────┐
-│  🤖 AI Reasoning Engine                                    │
-│  (OpenRouter - Comparative analysis & explanation)          │
-└───────────────────┬───────────────────────────────────────┘
-                    ↓
-┌─────────────────────────────────────────────────────────────┐
-│  🏆 Smart Recommendation                                   │
-│  (Best platform + Savings + Clear explanation)             │
-└─────────────────────────────────────────────────────────────┘
-```
+---
 
 ## 🛠️ Tech Stack
 
-**Built with modern, accessible technologies:**
+- Streamlit for UI
+- Python for logic
+- OpenRouter (mistralai/devstral-2512:free)
+- CSV-based data (no database)
+- Environment variables for security
 
-- **Cline CLI**: Low-code development environment
-- **Streamlit**: Simple, powerful UI framework
-- **OpenRouter**: AI API access (mistralai/devstral-2512:free)
-- **Python**: Core logic and calculations
-- **CSV-based data**: No-code data management
-- **Environment variables**: Secure API key management
+---
 
 ## 🚀 How to Run
 
-### Quick Setup:
+1. Install dependencies:
 
-1. **Install dependencies:**
-```bash
 pip install -r requirements.txt
-```
 
-2. **Set up environment:**
-```bash
-echo "OPENROUTER_API_KEY=your_api_key_here" > .env
-```
+2. Create environment file:
 
-3. **Run the application:**
-```bash
+OPENROUTER_API_KEY=your_api_key_here
+
+3. Run the app:
+
 streamlit run app.py
-```
 
-### Requirements:
-- Python 3.7+
-- OpenRouter API key (free tier available)
-- No database required (CSV-based)
+---
 
 ## 📁 Project Structure
 
-```
 AI Global Payment & Cost Optimizer/
-├── app.py                  # Streamlit UI
-├── calculator.py            # Rule-based calculations
-├── ai_engine.py             # AI reasoning
+├── app.py
+├── calculator.py
+├── ai_engine.py
+├── preferences/
+│   └── weights.py
+├── simulator/
+│   └── scenario.py
+├── visuals/
+│   ├── charts.py
+│   ├── highlights.py
+│   └── fx_charts.py
 ├── data/
-│   └── payment_methods.csv  # Editable payment data
-├── requirements.txt         # Dependencies
-└── README.md                # Documentation
-```
+│   ├── payment_methods.csv
+│   └── historical_fx.csv
+├── requirements.txt
+└── README.md
 
-## 🎯 VisaVerse AI Hackathon Project Description
+---
 
-**AI Global Payment & Cost Optimizer** solves the problem of opaque and expensive international payments. When sending money across borders, users face confusing fee structures, hidden FX markups, and unclear settlement times - making it difficult to choose the best payment method.
+## 🎯 Hackathon Project Description
 
-Our solution combines deterministic financial calculations with AI-powered reasoning to provide clear, actionable recommendations. Users simply input their payment details, and our system calculates exact costs for each platform, then uses AI to analyze trade-offs and generate natural language explanations.
+AI Global Payment & Cost Optimizer solves the problem of opaque and expensive international payments. Users face confusing fee structures, hidden FX markups, and unclear settlement times when sending money across borders.
 
-What makes it unique is the powerful combination of transparent calculations and intelligent reasoning. The AI doesn't perform math - it provides human-like explanations of why one option is better than others, considering factors like cost, speed, and reliability.
+This project combines deterministic financial calculations with AI-powered reasoning. Users input their payment details and preferences, and the system calculates exact costs for each platform. A preference-based scoring engine ranks options, and AI explains trade-offs in clear, natural language.
 
-Built with Streamlit and OpenRouter, our solution is accessible to anyone making international payments. The CSV-based data layer allows easy customization without coding, making it ideal for expats, freelancers, and small businesses who want to maximize their money and make informed financial decisions.
+The AI does not perform math. It provides reasoning, trust, and explainability on top of transparent calculations.
+
+---
 
 ## ❓ Judge Q&A
 
-**Why AI instead of rules only?**
-AI provides nuanced reasoning and natural language explanations that go beyond simple rule-based selection. It can explain trade-offs between cost, speed, and reliability in human terms, making the recommendations more trustworthy and understandable.
+Why AI instead of rules only?  
+AI provides nuanced explanations and human-readable reasoning that rules alone cannot.
 
-**How is this low-code / no-code?**
-The core payment data is managed via CSV files that can be edited without coding. The Streamlit UI provides a simple interface, and Cline CLI enables low-code development. Users can customize payment platforms and fee structures by editing the CSV.
+Is the data real?  
+The dataset uses realistic mock data based on real-world fee structures and can be replaced easily.
 
-**Is the data real?**
-The dataset contains realistic mock data based on actual payment platform fee structures. It's designed to demonstrate the concept and can be easily replaced with real data by editing the CSV file.
+How does this scale?  
+The architecture is modular. Data sources, UI, and AI reasoning can be expanded independently.
 
-**How can this scale?**
-The architecture is modular and scalable. Payment data can be expanded via CSV, the AI reasoning can handle more complex scenarios, and the Streamlit UI can be extended with additional features. The solution is built to grow with user needs.
+---
 
-## 🚀 Future Improvements
-- Integrate real-time FX rates and live payment provider APIs
-- Support user preference weighting (cheapest vs fastest vs balanced)
-- Add historical fee and FX trend analysis
-- Enable recurring payment optimization for freelancers and teams
-- Expand coverage to more countries and payment corridors
-- Introduce confidence scoring for AI recommendations
-- Add visual fee breakdowns and comparison charts
-- Implement user profiles and saved preferences
-- Improve AI personalization based on usage patterns
-- Deploy a scalable backend for production workloads
+Built for hackathons. Designed like a real fintech product.
 
-## 👨🏻‍💼 Author
-Swapnil Nicolson Dadel
-Solo developer responsible for problem definition, system design, backend logic, Streamlit UI, AI integration via OpenRouter, data modeling, deployment, and documentation.
+Author: Swapnil Nicolson Dadel
