@@ -28,15 +28,7 @@ https://swapitsneil-ai-global-payment-cost-optimizer-app-pzexoa.streamlit.app/
 
 ## 📸 Screenshot
 
-<img width="2650" height="1528" alt="Image" src="https://github.com/user-attachments/assets/da91f5a2-1e54-4cd7-81d4-3894af2f0815" />
 
-<img width="1750" height="1466" alt="Image" src="https://github.com/user-attachments/assets/75052f34-fe25-4f50-a76f-44022ce5294c" />
-
-<img width="1634" height="1364" alt="Image" src="https://github.com/user-attachments/assets/d9d08b81-73c8-4a13-93b6-a8e8696ed56a" />
-
-<img width="1670" height="1046" alt="Image" src="https://github.com/user-attachments/assets/0629f533-c0ac-41aa-b9e5-2a9c48bafafc" />
-
-<img width="1856" height="1234" alt="Image" src="https://github.com/user-attachments/assets/426c936a-d73c-4a40-a8df-216a538a2057" />
 
 ---
 
