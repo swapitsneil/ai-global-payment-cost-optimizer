@@ -82,7 +82,7 @@ User Input
 → Final Recommendation + Explanation
 
 ASCII Architecture Diagram:
-
+```
 ┌────────────────────────────────────────────┐
 │ User Input (Amount, Countries, Preference) │
 └───────────────┬────────────────────────────┘
@@ -105,7 +105,7 @@ ASCII Architecture Diagram:
 ┌────────────────────────────────────────────┐
 │ Final Recommendation + Savings Insight     │
 └────────────────────────────────────────────┘
-
+```
 ---
 
 ## 🛠️ Tech Stack
@@ -135,7 +135,7 @@ streamlit run app.py
 ---
 
 ## 📁 Project Structure
-
+```
 AI Global Payment & Cost Optimizer/
 ├── app.py
 ├── calculator.py
@@ -153,7 +153,7 @@ AI Global Payment & Cost Optimizer/
 │   └── historical_fx.csv
 ├── requirements.txt
 └── README.md
-
+```
 ---
 
 ## 🎯 Hackathon Project Description
