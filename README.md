@@ -189,6 +189,6 @@ The architecture is modular. Data sources, UI, and AI reasoning can be expanded 
 
 ---
 
-Built for hackathons. Designed like a real fintech product.
+Built for hackathon. Designed like a real fintech product.
 
 Author: Swapnil Nicolson Dadel
