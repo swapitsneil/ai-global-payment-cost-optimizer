@@ -1,75 +1,103 @@
 """
 AI Global Payment & Cost Optimizer - Calculation Engine
 
-This module contains deterministic, rule-based calculation functions for:
+Deterministic, rule-based calculations for:
 - Fixed fees
-- Percentage-based fees
-- Foreign exchange markups
-- Total cost calculations
+- Percentage fees
+- FX markup
+- Total cost
+- Net received
+- Scoring (for preference-based ranking)
 """
+
+# -----------------------------
+# BASIC FEE CALCULATIONS
+# -----------------------------
 
 def calculate_fixed_fee(amount, fixed_fee):
     """
-    Calculate fixed fee component.
-
-    Args:
-        amount: Payment amount
-        fixed_fee: Fixed fee amount
-
-    Returns:
-        Fixed fee amount
+    Fixed fee component
     """
     return fixed_fee
 
+
 def calculate_percentage_fee(amount, percentage):
     """
-    Calculate percentage-based fee component.
-
-    Args:
-        amount: Payment amount
-        percentage: Percentage fee (e.g., 1.5 for 1.5%)
-
-    Returns:
-        Percentage fee amount
+    Percentage-based fee
+    Example: 1.5 → 1.5%
     """
     return amount * (percentage / 100)
 
+
 def calculate_fx_markup(amount, markup_percent):
     """
-    Calculate foreign exchange markup loss.
-
-    Args:
-        amount: Amount to be converted
-        markup_percent: FX markup percentage
-
-    Returns:
-        FX loss amount
+    FX markup loss
     """
     return amount * (markup_percent / 100)
 
+
 def calculate_total_fee(fixed_fee, percentage_fee):
     """
-    Calculate total fee combining fixed and percentage fees.
-
-    Args:
-        fixed_fee: Fixed fee amount
-        percentage_fee: Percentage fee amount
-
-    Returns:
-        Total fee amount
+    Total fee = fixed + percentage
     """
     return fixed_fee + percentage_fee
 
+
 def calculate_net_received(amount, total_fee, fx_loss):
     """
-    Calculate net amount received after all fees and FX losses.
-
-    Args:
-        amount: Original payment amount
-        total_fee: Total fee amount
-        fx_loss: FX loss amount
-
-    Returns:
-        Net amount received
+    Net received after all deductions
     """
     return amount - total_fee - fx_loss
+
+
+# -----------------------------
+# NEW: TOTAL COST HELPER
+# -----------------------------
+
+def calculate_total_cost(total_fee, fx_loss):
+    """
+    Total cost paid by user (fees + FX loss)
+    """
+    return total_fee + fx_loss
+
+
+# -----------------------------
+# NEW: SCORING ENGINE (FOR PREFERENCES)
+# -----------------------------
+
+def calculate_score(
+    net_received,
+    total_cost,
+    settlement_time_days,
+    weights=None
+):
+    """
+    Computes a normalized score for ranking platforms.
+
+    weights example:
+    {
+        "cost": 0.5,
+        "speed": 0.3,
+        "net": 0.2
+    }
+    """
+
+    if weights is None:
+        weights = {
+            "cost": 0.4,
+            "speed": 0.3,
+            "net": 0.3
+        }
+
+    # Normalize values (simple heuristic)
+    cost_score = 1 / (1 + total_cost)
+    speed_score = 1 / (1 + settlement_time_days)
+    net_score = net_received
+
+    final_score = (
+        weights["cost"] * cost_score +
+        weights["speed"] * speed_score +
+        weights["net"] * net_score
+    )
+
+    return final_score

@@ -1,57 +1,60 @@
 """
 AI Global Payment & Cost Optimizer - Streamlit UI
-
-This file contains the main user interface for the payment optimizer application.
-It handles user input, displays payment comparisons, and shows AI-powered recommendations.
 """
 
 import streamlit as st
 import pandas as pd
+
 from calculator import (
     calculate_fixed_fee,
     calculate_percentage_fee,
     calculate_fx_markup,
     calculate_total_fee,
     calculate_net_received,
+    calculate_total_cost,
+    calculate_score,
 )
 
+from visuals.charts import show_cost_comparison
+from visuals.highlights import show_savings_highlight
+from visuals.fx_charts import show_fx_volatility_chart
 
+from simulator.scenario import run_scenario_simulation
+from preferences.weights import get_preference_weights
+from ai_engine import get_ai_recommendation
+
+
+# -----------------------
 # Data Loading
+# -----------------------
 
 def load_payment_data():
-    """Load and normalize payment methods data from CSV."""
     df = pd.read_csv("data/payment_methods.csv")
 
-    # Normalize text columns safely
     for col in ["sender_country", "receiver_country", "platform"]:
         df[col] = df[col].astype(str).str.strip()
 
-    # Normalize supported column (prevents .str errors)
     df["supported"] = df["supported"].astype(str).str.strip().str.lower()
-
     return df
 
 
-
+# -----------------------
 # Filtering Logic
+# -----------------------
 
 def filter_payment_options(df, sender_country, receiver_country):
-    """Filter payment options based on sender, receiver, and supported status."""
-    sender_country = sender_country.strip()
-    receiver_country = receiver_country.strip()
-
-    filtered = df[
-        (df["sender_country"] == sender_country)
-        & (df["receiver_country"] == receiver_country)
+    return df[
+        (df["sender_country"] == sender_country.strip())
+        & (df["receiver_country"] == receiver_country.strip())
         & (df["supported"] == "true")
     ].copy()
 
-    return filtered
 
-
+# -----------------------
 # Cost Calculations
+# -----------------------
+
 def calculate_payment_costs(df, amount):
-    """Calculate fees, FX loss, and net received for each platform."""
     results = []
 
     for _, row in df.iterrows():
@@ -61,118 +64,136 @@ def calculate_payment_costs(df, amount):
 
         fx_loss = calculate_fx_markup(amount, row["fx_markup_percent"])
         net_received = calculate_net_received(amount, total_fee, fx_loss)
+        total_cost = calculate_total_cost(total_fee, fx_loss)
 
         results.append({
             "platform": row["platform"],
             "total_fee": round(total_fee, 2),
             "fx_loss": round(fx_loss, 2),
+            "total_cost": round(total_cost, 2),
             "net_received": round(net_received, 2),
             "settlement_time_days": row["settlement_time_days"],
+            "currency_sent": row["currency_sent"],
+            "currency_received": row["currency_received"],
         })
 
     return pd.DataFrame(results)
 
 
-
+# -----------------------
 # Main App
+# -----------------------
 
 def main():
     st.title("🌍 AI Global Payment & Cost Optimizer")
     st.markdown("**Find the smartest way to send money internationally**")
 
-    # User Inputs
     st.header("📋 Payment Details")
 
     sender_country = st.text_input("🌎 Sender Country", "USA")
     receiver_country = st.text_input("🌍 Receiver Country", "UK")
-    amount = st.number_input(
-        "💰 Amount (USD)",
-        min_value=0.01,
-        value=1000.0,
-        step=0.01
+    amount = st.number_input("💰 Amount (USD)", min_value=0.01, value=1000.0)
+
+    preference = st.selectbox(
+        "🎯 What matters most to you?",
+        ["Balanced", "Cheapest", "Fastest"]
     )
 
     if st.button("Compare Payment Options"):
-        try:
-            payment_data = load_payment_data()
-            filtered_options = filter_payment_options(
-                payment_data, sender_country, receiver_country
-            )
+        payment_data = load_payment_data()
+        filtered = filter_payment_options(
+            payment_data, sender_country, receiver_country
+        )
 
-            if filtered_options.empty:
-                st.warning(
-                    f"No supported payment platforms found for {sender_country} → {receiver_country}."
-                )
-                return
+        if filtered.empty:
+            st.warning("No supported platforms for this corridor")
+            return
 
-            # Calculate results
-            results_df = calculate_payment_costs(filtered_options, amount)
+        results_df = calculate_payment_costs(filtered, amount)
 
-            # Display comparison table
-            st.header("📊 Payment Comparison")
-            st.dataframe(results_df, use_container_width=True)
+        # -----------------------
+        # Preference-based Scoring
+        # -----------------------
 
-            # -------------------------
-            # AI Recommendation
-            # -------------------------
-            from ai_engine import get_ai_recommendation
+        weights = get_preference_weights(preference)
 
-            try:
-                best_platform, explanation = get_ai_recommendation(results_df)
+        results_df["score"] = results_df.apply(
+            lambda row: calculate_score(
+                net_received=row["net_received"],
+                total_cost=row["total_cost"],
+                settlement_time_days=row["settlement_time_days"],
+                weights=weights
+            ),
+            axis=1
+        )
 
-                # Normalize explanation spacing (fixes glued words)
-                explanation = " ".join(explanation.split())
+        results_df = results_df.sort_values("score", ascending=False)
 
-                best_option = results_df[
-                    results_df["platform"] == best_platform
-                ].iloc[0]
+        # -----------------------
+        # Display Results
+        # -----------------------
 
-                other_options = results_df[
-                    results_df["platform"] != best_platform
-                ]
+        st.header("📊 Payment Comparison")
+        st.dataframe(results_df, use_container_width=True)
 
-                # Safe savings calculation
-                if not other_options.empty:
-                    avg_other_net = other_options["net_received"].mean()
-                    savings = best_option["net_received"] - avg_other_net
-                    savings_text = f"💰 Estimated savings: ${savings:.2f}"
-                else:
-                    savings_text = "💰 This is the only available option"
+        show_cost_comparison(results_df)
+        show_savings_highlight(results_df)
 
-                st.header("🤖 AI Recommendation")
-                st.success(f"🏆 Best Platform: {best_platform}")
-                st.info(savings_text)
+        # -----------------------
+        # FX Volatility Insight
+        # -----------------------
 
-                # Clean, wrapped explanation box
-                st.subheader("🧠 Recommendation")
-                st.markdown(
-                    f"""
-                    <div style="
-                        background-color: #1f2933;
-                        padding: 16px;
-                        border-radius: 8px;
-                        line-height: 1.6;
-                        font-size: 15px;
-                        color: #e5e7eb;
-                        white-space: normal;
-                        word-wrap: break-word;
-                    ">
-                    {explanation}
-                    </div>
-                    """,
-                    unsafe_allow_html=True
-                )
+        show_fx_volatility_chart(
+            results_df.iloc[0]["currency_sent"],
+            results_df.iloc[0]["currency_received"],
+        )
 
-            except Exception:
-                # Fallback if AI fails
-                best_row = results_df.loc[results_df["net_received"].idxmax()]
-                st.header("🤖 AI Recommendation")
-                st.warning("AI recommendation unavailable. Showing best option based on calculations.")
-                st.success(f"🏆 Best Platform: {best_row['platform']}")
-                st.info(f"Net received: ${best_row['net_received']:.2f}")
+        # -----------------------
+        # AI Recommendation
+        # -----------------------
 
-        except Exception as e:
-            st.error(f"An error occurred: {str(e)}")
+        best_platform, explanation = get_ai_recommendation(results_df)
+
+        best_row = results_df.iloc[0]
+
+        st.header("🤖 AI Recommendation")
+        st.success(f"🏆 Recommended Platform: {best_platform}")
+        st.info(
+            f"Net received: ${best_row['net_received']:.2f} | "
+            f"Total cost: ${best_row['total_cost']:.2f} | "
+            f"Settlement: {best_row['settlement_time_days']} days"
+        )
+
+        st.subheader("🧠 Why this option?")
+        st.markdown(
+            f"""
+            <div style="
+                background-color:#1f2933;
+                padding:16px;
+                border-radius:8px;
+                color:#e5e7eb;
+                line-height:1.6;
+            ">
+            {explanation}
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+        # -----------------------
+        # Scenario Simulator
+        # -----------------------
+
+        st.header("🔮 What-If Scenario Simulation")
+
+        amounts = st.multiselect(
+            "Simulate for different transfer amounts",
+            [500, 1000, 2500, 5000],
+            default=[500, 1000, 5000]
+        )
+
+        scenario_df = run_scenario_simulation(filtered, amounts)
+        st.dataframe(scenario_df, use_container_width=True)
 
 
 if __name__ == "__main__":
