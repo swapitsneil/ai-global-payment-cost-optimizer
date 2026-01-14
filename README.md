@@ -22,7 +22,8 @@ International payments are full of hidden costs. Users lose money due to opaque 
 
 ## ▶️ Live Demo
 
-https://swapitsneil-ai-global-payment-cost-optimizer-app-pzexoa.streamlit.app/
+YouTube - https://youtu.be/E9bbiNmFJFQ
+Streamlit - https://swapitsneil-ai-global-payment-cost-optimizer-app-pzexoa.streamlit.app/
 
 ---
 
