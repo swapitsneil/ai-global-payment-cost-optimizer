@@ -194,3 +194,15 @@ The architecture is modular. Data sources, UI, and AI reasoning can be expanded 
 Built for hackathon. Designed like a real fintech product.
 
 Author: Swapnil Nicolson Dadel
+
+---
+## 📬 Contact
+
+If you’d like to connect, collaborate, or discuss opportunities, feel free to reach out:
+
+- 📧 Email: **swapnilnicolson.201@gmail.com**
+- 💼 GitHub: https://github.com/swapitsneil
+
+I’m open to feedback, collaboration, and job opportunities.
+
+---
