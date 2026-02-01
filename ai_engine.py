@@ -7,7 +7,7 @@ load_dotenv()
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 
 API_URL = "https://openrouter.ai/api/v1/chat/completions"
-MODEL = "mistralai/devstral-2512:free"
+MODEL = "tngtech/deepseek-r1t2-chimera:free"
 
 
 def get_ai_recommendation(results_df):
