@@ -124,7 +124,7 @@ ASCII Architecture Diagram:
 
 - Streamlit for UI
 - Python for logic
-- OpenRouter (mistralai/devstral-2512:free)
+- OpenRouter (tngtech/deepseek-r1t2-chimera:free)
 - CSV-based data (no database)
 - Environment variables for security
 
